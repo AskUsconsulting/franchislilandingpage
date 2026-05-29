@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Franchisli — Franchise Management Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Variables ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:      #2c4fa3;
+      --brand-dark: #1e3a7f;
+      --brand-mid:  #3a61c0;
+      --brand-50:   #eef2ff;
+      --brand-100:  #dce6ff;
+      --accent:     #d95f3b;
+      --accent-dk:  #b84e2f;
+      --text:       #0f172a;
+      --muted:      #64748b;
+      --border:     #e2e8f0;
+      --bg:         #ffffff;
+      --bg-soft:    #f8fafc;
+      --radius:     12px;
+      --radius-lg:  20px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; line-height: 1.15; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ── Utility ────────────────────────────────────────────────────────── */
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 3.8vw, 46px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all .2s;
+      box-shadow: 0 4px 16px rgba(44,79,163,.28);
+    }
+    .btn-primary:hover {
+      background: var(--brand-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(44,79,163,.38);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--text);
+      background: white;
+      border: 1.5px solid var(--border);
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all .2s;
+    }
+    .btn-ghost:hover { border-color: var(--brand); color: var(--brand); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--brand);
+      border: 1.5px solid var(--brand-100);
+      background: var(--brand-50);
+      padding: 11px 22px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all .2s;
+    }
+    .btn-outline:hover { background: var(--brand-100); }
+
+    /* ── Top Banner ────────────────────────────────────────────────────── */
+    .top-banner {
+      background: var(--brand);
+      color: rgba(255,255,255,.9);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+    .top-banner a {
+      color: white;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      margin-left: 6px;
+    }
+
+    /* ── Navigation ────────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 16px rgba(15,23,42,.08); }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: -.5px;
+      color: var(--brand);
+    }
+    .nav-logomark {
+      width: 33px;
+      height: 33px;
+      background: var(--brand);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 15px;
+      font-weight: 900;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--brand); }
+    .nav-ctas { display: flex; align-items: center; gap: 10px; }
+    .nav-login {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all .2s;
+    }
+    .nav-login:hover { color: var(--text); background: var(--bg-soft); }
+    .nav-demo {
+      background: var(--brand);
+      color: white;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      transition: all .2s;
+      box-shadow: 0 2px 8px rgba(44,79,163,.25);
+    }
+    .nav-demo:hover { background: var(--brand-dark); transform: translateY(-1px); }
+
+    /* ── Hero ──────────────────────────────────────────────────────────── */
+    .hero {
+      padding: 96px 6% 80px;
+      background: linear-gradient(150deg, #f0f5ff 0%, #ffffff 46%, #fff8f5 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(44,79,163,.07) 0%, transparent 65%);
+      top: -200px; left: -150px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(217,95,59,.05) 0%, transparent 65%);
+      top: 0; right: -150px;
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--brand-50);
+      border: 1px solid var(--brand-100);
+      color: var(--brand);
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 28px;
+      letter-spacing: .02em;
+      position: relative;
+    }
+    .hero h1 {
+      font-size: clamp(40px, 5.5vw, 70px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      max-width: 860px;
+      margin: 0 auto 24px;
+      color: var(--text);
+    }
+    .hero h1 .hl { color: var(--brand); }
+    .hero > p {
+      font-size: clamp(16px, 1.8vw, 20px);
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 42px;
+      line-height: 1.75;
+      position: relative;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 68px;
+      position: relative;
+    }
+
+    /* ── Dashboard Mockup ──────────────────────────────────────────────── */
+    .hero-mockup-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-mockup-wrap::before {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 85%;
+      height: 80px;
+      background: rgba(44,79,163,.12);
+      border-radius: 50%;
+      filter: blur(32px);
+      pointer-events: none;
+    }
+    .hero-mockup {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 24px 64px rgba(15,23,42,.13), 0 1px 4px rgba(15,23,42,.05);
+      overflow: hidden;
+      text-align: left;
+      position: relative;
+    }
+    .m-topbar {
+      background: var(--brand);
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .m-dots { display: flex; gap: 6px; }
+    .m-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .m-dot.r { background: #ff5f57; }
+    .m-dot.y { background: #febc2e; }
+    .m-dot.g { background: #28c840; }
+    .m-urlbar {
+      background: rgba(255,255,255,.14);
+      border-radius: 6px;
+      padding: 4px 18px;
+      font-size: 12px;
+      color: rgba(255,255,255,.75);
+      font-family: 'Inter', monospace;
+    }
+    .m-body { display: flex; height: 440px; }
+    .m-sidebar {
+      width: 54px;
+      background: var(--brand-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 14px 0;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+    .m-nav {
+      width: 38px; height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .m-nav.active { background: rgba(255,255,255,.22); }
+    .m-nav:not(.active):hover { background: rgba(255,255,255,.1); }
+    .m-main {
+      flex: 1;
+      background: var(--bg-soft);
+      padding: 18px 20px;
+      overflow: hidden;
+    }
+    .m-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .m-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .m-date { font-size: 11px; color: var(--muted); }
+    .m-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .m-stat {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 11px 13px;
+    }
+    .m-stat-label { font-size: 10px; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+    .m-stat-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .m-stat-val.green { color: #16a34a; }
+    .m-stat-val.orange { color: var(--accent); }
+    .m-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .m-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 12px 14px;
+    }
+    .m-card-title { font-size: 11px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .m-row { display: flex; align-items: center; gap: 6px; margin-bottom: 7px; }
+    .m-loc { font-size: 10px; color: var(--muted); width: 76px; flex-shrink: 0; }
+    .m-bar-bg {
+      flex: 1;
+      height: 5px;
+      background: #f1f5f9;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .m-bar { height: 100%; border-radius: 99px; background: var(--brand); }
+    .m-pct { font-size: 10px; font-weight: 700; color: var(--text); width: 26px; text-align: right; }
+    .m-grade {
+      width: 17px; height: 17px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 800;
+    }
+    .ga { background: #dcfce7; color: #16a34a; }
+    .gb { background: #fef9c3; color: #a16207; }
+    .gc { background: #fee2e2; color: #dc2626; }
+    .m-finding { display: flex; align-items: flex-start; gap: 7px; margin-bottom: 7px; }
+    .f-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .f-dot.crit { background: #dc2626; }
+    .f-dot.maj  { background: #f59e0b; }
+    .f-dot.min  { background: var(--brand-mid); }
+    .f-text { font-size: 10.5px; color: var(--muted); line-height: 1.35; }
+    .f-text strong { color: var(--text); font-weight: 600; }
+
+    /* ── Trusted By ─────────────────────────────────────────────────────── */
+    .trusted {
+      padding: 52px 6%;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .trusted-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .trusted-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 56px;
+      flex-wrap: wrap;
+    }
+    .trusted-logo {
+      height: 52px;
+      object-fit: contain;
+      opacity: .7;
+      filter: grayscale(20%);
+      transition: opacity .2s, filter .2s;
+    }
+    .trusted-logo:hover { opacity: 1; filter: grayscale(0); }
+
+    /* ── Problem Section ────────────────────────────────────────────────── */
+    .problem {
+      padding: 108px 6%;
+      background: var(--bg);
+      text-align: center;
+    }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .pain-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      text-align: left;
+      transition: box-shadow .2s;
+    }
+    .pain-card:hover { box-shadow: 0 6px 24px rgba(15,23,42,.06); }
+    .pain-icon { font-size: 28px; margin-bottom: 16px; }
+    .pain-card h3 { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .pain-card p { font-size: 14.5px; color: var(--muted); line-height: 1.65; }
+
+    /* ── Features Grid ──────────────────────────────────────────────────── */
+    .features {
+      padding: 108px 6%;
+      background: var(--bg-soft);
+    }
+    .features-hd { text-align: center; margin-bottom: 56px; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .feat-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 26px;
+      transition: all .22s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feat-card::after {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--brand), var(--brand-mid));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+    .feat-card:hover { border-color: var(--brand-100); box-shadow: 0 8px 28px rgba(44,79,163,.09); transform: translateY(-3px); }
+    .feat-card:hover::after { transform: scaleX(1); }
+    .feat-icon {
+      width: 48px; height: 48px;
+      background: var(--brand-50);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+    .feat-card h3 { font-size: 16.5px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .feat-card p { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+    .feat-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .feat-pill {
+      background: var(--brand-50);
+      color: var(--brand);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+
+    /* ── Feature Spotlights ─────────────────────────────────────────────── */
+    .spotlight {
+      padding: 108px 6%;
+    }
+    .spotlight.alt { background: var(--bg-soft); }
+    .spot-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .spot-inner.rev { direction: rtl; }
+    .spot-inner.rev > * { direction: ltr; }
+    .spot-text .section-eyebrow,
+    .spot-text .section-title { text-align: left; }
+    .spot-text .section-title { font-size: clamp(24px, 2.8vw, 38px); }
+    .spot-text > p {
+      font-size: 15.5px;
+      color: var(--muted);
+      line-height: 1.78;
+      margin-bottom: 22px;
+    }
+    .spot-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 30px;
+    }
+    .spot-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: 14.5px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .spot-check {
+      width: 20px; height: 20px;
+      background: var(--brand-50);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand);
+      font-size: 10px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ─ Mockup Shells ── */
+    .sp-mockup {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 16px 48px rgba(15,23,42,.10);
+      overflow: hidden;
+    }
+    .sp-mbar {
+      background: var(--brand);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sp-mbar-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.35); }
+    .sp-mbar-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: white;
+      margin-left: 4px;
+    }
+    .sp-mbody { padding: 16px; }
+
+    /* Audit mockup */
+    .asc {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 14px;
+      margin-bottom: 10px;
+    }
+    .asc.bad { background: #fff5f5; border-color: #fecaca; }
+    .asc-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .asc-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .asc-meta { font-size: 11px; color: var(--muted); }
+    .asc-row { display: flex; align-items: center; gap: 10px; }
+    .asc-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--brand);
+    }
+    .asc-num.red { color: #dc2626; }
+    .asc-badge {
+      padding: 2px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .asc-badge.a { background: #dcfce7; color: #16a34a; }
+    .asc-badge.c { background: #fee2e2; color: #dc2626; }
+    .asc-barw {
+      flex: 1;
+      height: 6px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .asc-bar { height: 100%; border-radius: 99px; background: var(--brand); }
+    .asc-bar.red { background: #dc2626; }
+    .findings-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #c2410c;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+      margin-top: 6px;
+    }
+
+    /* Comms mockup */
+    .thread-list { margin-bottom: 10px; }
+    .t-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 9px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 2px;
+    }
+    .t-item.active { background: var(--brand-50); }
+    .t-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .av-b { background: var(--brand-100); color: var(--brand); }
+    .av-o { background: #ffedd5; color: var(--accent); }
+    .av-g { background: #dcfce7; color: #16a34a; }
+    .t-info { flex: 1; min-width: 0; }
+    .t-subject { font-size: 12px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .t-preview { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .t-unread { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex-shrink: 0; }
+    .chat-area { display: flex; flex-direction: column; }
+    .bubble {
+      padding: 8px 12px;
+      border-radius: 11px;
+      font-size: 11px;
+      line-height: 1.5;
+      max-width: 82%;
+      margin-bottom: 7px;
+    }
+    .bubble .bsender { font-size: 10px; font-weight: 700; margin-bottom: 3px; }
+    .bubble.hq {
+      background: var(--brand);
+      color: white;
+      margin-left: auto;
+      border-bottom-right-radius: 2px;
+    }
+    .bubble.hq .bsender { color: rgba(255,255,255,.65); }
+    .bubble.loc {
+      background: var(--bg-soft);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 2px;
+    }
+    .bubble.loc .bsender { color: var(--muted); }
+
+    /* Training mockup */
+    .tm-wrap { overflow-x: auto; }
+    table.tm {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    table.tm th {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      padding: 6px 10px;
+      text-align: center;
+      background: var(--bg-soft);
+      border-bottom: 1px solid var(--border);
+    }
+    table.tm th:first-child { text-align: left; }
+    table.tm td {
+      padding: 8px 10px;
+      text-align: center;
+      border-bottom: 1px solid #f1f5f9;
+      color: var(--muted);
+    }
+    table.tm td:first-child {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 11px;
+    }
+    .tc { color: #16a34a; font-size: 14px; }
+    .tx { color: #dc2626; font-size: 14px; }
+    .tm-footer { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 11px; }
+    .tm-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 99px;
+    }
+    .tp-g { background: #dcfce7; color: #16a34a; }
+    .tp-y { background: #fef9c3; color: #a16207; }
+    .tp-r { background: #fee2e2; color: #dc2626; }
+
+    /* ── "Built for franchise ops" dark band ──────────────────────────── */
+    .built-band {
+      padding: 108px 6%;
+      background: var(--brand);
+      text-align: center;
+      color: white;
+    }
+    .built-band .section-eyebrow { color: rgba(255,255,255,.55); }
+    .built-band .section-title { color: white; }
+    .built-band .section-sub { color: rgba(255,255,255,.65); max-width: 560px; }
+    .built-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 1020px;
+      margin: 0 auto;
+    }
+    .built-item {
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px;
+      padding: 20px 18px;
+      text-align: left;
+      transition: all .2s;
+    }
+    .built-item:hover { background: rgba(255,255,255,.14); transform: translateY(-2px); }
+    .built-item-icon { font-size: 20px; margin-bottom: 9px; }
+    .built-item h4 { font-size: 14px; font-weight: 700; color: white; margin-bottom: 4px; }
+    .built-item p { font-size: 12.5px; color: rgba(255,255,255,.55); line-height: 1.55; }
+
+    /* ── CTA / Waitlist ─────────────────────────────────────────────────── */
+    .cta-section {
+      padding: 108px 6%;
+      text-align: center;
+      background: var(--bg-soft);
+    }
+    .cta-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 64px 52px;
+      max-width: 680px;
+      margin: 0 auto;
+      box-shadow: 0 16px 48px rgba(15,23,42,.06);
+    }
+    .cta-box h2 {
+      font-size: clamp(26px, 3.2vw, 42px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .cta-box > p {
+      font-size: 16.5px;
+      color: var(--muted);
+      line-height: 1.72;
+      margin-bottom: 34px;
+    }
+    .cta-form {
+      display: flex;
+      gap: 10px;
+      max-width: 490px;
+      margin: 0 auto;
+    }
+    .cta-form input {
+      flex: 1;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .cta-form input:focus { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(44,79,163,.07); }
+    .cta-form input::placeholder { color: #94a3b8; }
+    .cta-form button {
+      background: var(--brand);
+      color: white;
+      border: none;
+      padding: 14px 26px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .2s;
+    }
+    .cta-form button:hover { background: var(--brand-dark); transform: translateY(-1px); }
+    .cta-note { font-size: 12.5px; color: var(--muted); margin-top: 13px; }
+
+    /* ── Footer ─────────────────────────────────────────────────────────── */
+    footer {
+      background: #080f1e;
+      color: rgba(255,255,255,.88);
+      padding: 64px 6% 40px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 52px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      color: white;
+      letter-spacing: -.4px;
+      margin-bottom: 14px;
+    }
+    .footer-logomark {
+      width: 30px; height: 30px;
+      background: rgba(255,255,255,.12);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      color: white;
+    }
+    .footer-desc {
+      font-size: 13.5px;
+      color: rgba(255,255,255,.45);
+      line-height: 1.72;
+      max-width: 260px;
+    }
+    .footer-col h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-col ul li a { font-size: 13.5px; color: rgba(255,255,255,.55); transition: color .2s; }
+    .footer-col ul li a:hover { color: white; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding-top: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-bottom p { font-size: 12.5px; color: rgba(255,255,255,.25); }
+    .footer-legal { display: flex; gap: 22px; }
+    .footer-legal a { font-size: 12.5px; color: rgba(255,255,255,.25); transition: color .2s; }
+    .footer-legal a:hover { color: rgba(255,255,255,.6); }
+
+    /* ── Responsive ─────────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .built-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 800px) {
+      .nav-links { display: none; }
+      .pain-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+      .spot-inner,
+      .spot-inner.rev { grid-template-columns: 1fr; direction: ltr; gap: 40px; }
+      .m-body { height: 300px; }
+      .m-stats { grid-template-columns: repeat(2, 1fr); }
+      .m-cols { grid-template-columns: 1fr; }
+      .m-cols .m-card:last-child { display: none; }
+    }
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions a,
+      .hero-actions .btn-ghost { text-align: center; justify-content: center; }
+      .cta-form { flex-direction: column; }
+      .cta-box { padding: 40px 24px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 14px; }
+      .built-grid { grid-template-columns: 1fr; max-width: 360px; margin-left: auto; margin-right: auto; }
+      .m-body { height: auto; flex-direction: column; }
+      .m-sidebar { display: none; }
+      .m-main { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Top Banner ────────────────────────────────────────────────────── -->
+  <div class="top-banner">
+    🎉 Franchisli is now in early access — <a href="#waitlist">Reserve your spot →</a>
+  </div>
+
+  <!-- ── Navigation ────────────────────────────────────────────────────── -->
+  <nav id="main-nav">
+    <a href="#" class="nav-logo">
+      <div class="nav-logomark">F</div>
+      Franchisli
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Platform</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#waitlist">Pricing</a></li>
+      <li><a href="#waitlist">Contact</a></li>
+    </ul>
+    <div class="nav-ctas">
+      <a href="#" class="nav-login">Login</a>
+      <a href="#waitlist" class="nav-demo">Request Demo</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-badge">✦ Franchise Operations Platform</div>
+    <h1>One platform to run<br><span class="hl">every location, every day.</span></h1>
+    <p>Franchisli keeps your entire network aligned — audits, training, operations, and communication managed from a single platform built for franchise teams.</p>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn-primary">Request Demo →</a>
+      <a href="#features" class="btn-ghost">▶&nbsp; See how it works</a>
+    </div>
+
+    <!-- Dashboard Mockup -->
+    <div class="hero-mockup-wrap">
+      <div class="hero-mockup">
+        <div class="m-topbar">
+          <div class="m-dots">
+            <div class="m-dot r"></div>
+            <div class="m-dot y"></div>
+            <div class="m-dot g"></div>
+          </div>
+          <div class="m-urlbar">app.franchisli.com/dashboard</div>
+          <div style="width:60px"></div>
+        </div>
+        <div class="m-body">
+          <div class="m-sidebar">
+            <div class="m-nav active">📋</div>
+            <div class="m-nav">🔍</div>
+            <div class="m-nav">💬</div>
+            <div class="m-nav">📄</div>
+            <div class="m-nav">🎓</div>
+            <div class="m-nav">📊</div>
+            <div class="m-nav">📍</div>
+          </div>
+          <div class="m-main">
+            <div class="m-header">
+              <div class="m-title">Network Overview</div>
+              <div class="m-date">May 28, 2026</div>
+            </div>
+            <div class="m-stats">
+              <div class="m-stat">
+                <div class="m-stat-label">Avg Audit Score</div>
+                <div class="m-stat-val">89%</div>
+              </div>
+              <div class="m-stat">
+                <div class="m-stat-label">Active Locations</div>
+                <div class="m-stat-val">6</div>
+              </div>
+              <div class="m-stat">
+                <div class="m-stat-label">Training Rate</div>
+                <div class="m-stat-val green">78%</div>
+              </div>
+              <div class="m-stat">
+                <div class="m-stat-label">Open Findings</div>
+                <div class="m-stat-val orange">7</div>
+              </div>
+            </div>
+            <div class="m-cols">
+              <div class="m-card">
+                <div class="m-card-title">Location Scores</div>
+                <div class="m-row">
+                  <div class="m-loc">Downtown ATL</div>
+                  <div class="m-bar-bg"><div class="m-bar" style="width:97%"></div></div>
+                  <div class="m-pct">97%</div>
+                  <div class="m-grade ga">A</div>
+                </div>
+                <div class="m-row">
+                  <div class="m-loc">Marietta</div>
+                  <div class="m-bar-bg"><div class="m-bar" style="width:95%"></div></div>
+                  <div class="m-pct">95%</div>
+                  <div class="m-grade ga">A</div>
+                </div>
+                <div class="m-row">
+                  <div class="m-loc">Buckhead</div>
+                  <div class="m-bar-bg"><div class="m-bar" style="width:91%"></div></div>
+                  <div class="m-pct">91%</div>
+                  <div class="m-grade ga">A</div>
+                </div>
+                <div class="m-row">
+                  <div class="m-loc">Midtown</div>
+                  <div class="m-bar-bg"><div class="m-bar" style="width:88%; background:#f59e0b"></div></div>
+                  <div class="m-pct">88%</div>
+                  <div class="m-grade gb">B</div>
+                </div>
+                <div class="m-row">
+                  <div class="m-loc">Decatur</div>
+                  <div class="m-bar-bg"><div class="m-bar" style="width:74%; background:#dc2626"></div></div>
+                  <div class="m-pct">74%</div>
+                  <div class="m-grade gc">C</div>
+                </div>
+              </div>
+              <div class="m-card">
+                <div class="m-card-title">Recent Findings</div>
+                <div class="m-finding"><div class="f-dot crit"></div><div class="f-text"><strong>Decatur</strong> — Food temp log not maintained</div></div>
+                <div class="m-finding"><div class="f-dot crit"></div><div class="f-text"><strong>Decatur</strong> — Handwashing station unstocked</div></div>
+                <div class="m-finding"><div class="f-dot maj"></div><div class="f-text"><strong>Decatur</strong> — Grease buildup under fryers</div></div>
+                <div class="m-finding"><div class="f-dot min"></div><div class="f-text"><strong>Buckhead</strong> — Exterior signage lighting out</div></div>
+                <div class="m-finding"><div class="f-dot min"></div><div class="f-text"><strong>Midtown</strong> — Menu board not updated</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Trusted By ──────────────────────────────────────────────────────── -->
+  <section class="trusted">
+    <div class="trusted-label">Trusted by leading franchises</div>
+    <div class="trusted-logos">
+      <img src="./Golden_Corral_Grill_and_Bar.webp" alt="Golden Corral" class="trusted-logo">
+    </div>
+  </section>
+
+  <!-- ── Problem Section ───────────────────────────────────────────────── -->
+  <section class="problem">
+    <div class="section-eyebrow">The Problem</div>
+    <h2 class="section-title">Managing a franchise network<br>shouldn't feel like this.</h2>
+    <p class="section-sub" style="margin-bottom:56px">Scattered spreadsheets, disconnected tools, and zero visibility across locations. Your team spends more time coordinating than operating.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">🗂️</div>
+        <h3>Disconnected tools, everywhere</h3>
+        <p>Email for updates, spreadsheets for compliance, texting for handovers. Your team spends more time coordinating than executing.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📉</div>
+        <h3>No visibility until something breaks</h3>
+        <p>You find out about compliance failures after the fact — when a customer complains, an auditor flags it, or a fine is issued.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔄</div>
+        <h3>Inconsistent standards across locations</h3>
+        <p>Every location runs a little differently. Staff turnover makes it worse. Without a single source of truth, brand consistency suffers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Feature Grid ───────────────────────────────────────────────────── -->
+  <section class="features" id="features">
+    <div class="features-hd">
+      <div class="section-eyebrow">The Platform</div>
+      <h2 class="section-title">Everything your franchise needs,<br>in one place.</h2>
+      <p class="section-sub">Six purpose-built modules that keep every location operating at the same high standard — without the tool sprawl.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">📋</div>
+        <h3>Operations & Checklists</h3>
+        <p>Daily opening and closing checklists, shift handover notes, and task management — every shift runs to the same standard, every time.</p>
+        <div class="feat-pills">
+          <span class="feat-pill">Opening & Closing</span>
+          <span class="feat-pill">Shift Handovers</span>
+          <span class="feat-pill">Task Tracking</span>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔍</div>
+        <h3>Audits & Inspections</h3>
+        <p>Schedule or surprise-audit any location. Score, grade, and track findings in real time — then assign and close corrective actions fast.</p>
+        <div class="feat-pills">
+          <span class="feat-pill">Scheduled & Surprise</span>
+          <span class="feat-pill">Findings Tracking</span>
+          <span class="feat-pill">Score Trends</span>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💬</div>
+        <h3>Communications</h3>
+        <p>Broadcast urgent announcements to the whole network or message a single location directly. Read receipts keep everyone accountable.</p>
+        <div class="feat-pills">
+          <span class="feat-pill">HQ Announcements</span>
+          <span class="feat-pill">Direct Messaging</span>
+          <span class="feat-pill">Bulletin Board</span>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📄</div>
+        <h3>Documents & SOPs</h3>
+        <p>A searchable library for all your SOPs, brand standards, and policies. Track who's acknowledged what — and flag who hasn't.</p>
+        <div class="feat-pills">
+          <span class="feat-pill">SOP Library</span>
+          <span class="feat-pill">Brand Standards</span>
+          <span class="feat-pill">Policy Acknowledgments</span>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🎓</div>
+        <h3>Training & Compliance</h3>
+        <p>Track completion rates across every module, every employee, and every location. Know instantly who's certified and who's at risk.</p>
+        <div class="feat-pills">
+          <span class="feat-pill">Training Modules</span>
+          <span class="feat-pill">Completion Rates</span>
+          <span class="feat-pill">Compliance Dashboards</span>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📊</div>
+        <h3>Reporting & Analytics</h3>
+        <p>Location rankings, training reports, and exportable CSV and PDFs. The data you need to make decisions, not to wrangle spreadsheets.</p>
+        <div class="feat-pills">
+          <span class="feat-pill">Location Rankings</span>
+          <span class="feat-pill">CSV & PDF Export</span>
+          <span class="feat-pill">Training Matrix</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Spotlight 1: Audits ────────────────────────────────────────────── -->
+  <section class="spotlight">
+    <div class="spot-inner">
+      <div class="spot-text">
+        <div class="section-eyebrow">Audits & Inspections</div>
+        <h2 class="section-title">Know exactly how every location is performing.</h2>
+        <p>Run scheduled or surprise audits from anywhere. Every checklist item is scored, every finding is tracked, and every corrective action is assigned — with a full audit trail behind it.</p>
+        <ul class="spot-list">
+          <li><span class="spot-check">✓</span>Score and grade every location automatically by section</li>
+          <li><span class="spot-check">✓</span>Flag critical, major, and minor findings in real time</li>
+          <li><span class="spot-check">✓</span>Assign corrective actions and track resolution to close</li>
+          <li><span class="spot-check">✓</span>View score trends and compare locations side by side</li>
+        </ul>
+        <a href="#waitlist" class="btn-outline">See Audits in action →</a>
+      </div>
+      <div>
+        <div class="sp-mockup">
+          <div class="sp-mbar">
+            <div class="sp-mbar-dot"></div>
+            <div class="sp-mbar-title">Audits — Location Scores</div>
+          </div>
+          <div class="sp-mbody">
+            <div class="asc">
+              <div class="asc-top">
+                <div class="asc-name">Downtown Atlanta</div>
+                <div class="asc-meta">May 21, 2026 · Scheduled</div>
+              </div>
+              <div class="asc-row">
+                <div class="asc-num">97%</div>
+                <div class="asc-badge a">A</div>
+                <div class="asc-barw"><div class="asc-bar" style="width:97%"></div></div>
+              </div>
+            </div>
+            <div class="asc">
+              <div class="asc-top">
+                <div class="asc-name">Marietta</div>
+                <div class="asc-meta">May 8, 2026 · Scheduled</div>
+              </div>
+              <div class="asc-row">
+                <div class="asc-num">95%</div>
+                <div class="asc-badge a">A</div>
+                <div class="asc-barw"><div class="asc-bar" style="width:95%"></div></div>
+              </div>
+            </div>
+            <div class="asc bad">
+              <div class="asc-top">
+                <div class="asc-name">Decatur</div>
+                <div class="asc-meta">May 15, 2026 · Surprise</div>
+              </div>
+              <div class="asc-row">
+                <div class="asc-num red">74%</div>
+                <div class="asc-badge c">C</div>
+                <div class="asc-barw"><div class="asc-bar red" style="width:74%"></div></div>
+              </div>
+              <div class="findings-tag">⚠️ 2 Critical Findings — Action Required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Spotlight 2: Communications ───────────────────────────────────── -->
+  <section class="spotlight alt">
+    <div class="spot-inner rev">
+      <div class="spot-text">
+        <div class="section-eyebrow">Communications</div>
+        <h2 class="section-title">HQ and your locations,<br>always in sync.</h2>
+        <p>Broadcast urgent announcements to every location or open a direct message thread with any store. Read receipts mean you always know who's seen what — no more chasing managers over email.</p>
+        <ul class="spot-list">
+          <li><span class="spot-check">✓</span>Urgent and standard announcements to the whole network</li>
+          <li><span class="spot-check">✓</span>Direct two-way messaging between HQ and any location</li>
+          <li><span class="spot-check">✓</span>Read receipts so you know who's seen every message</li>
+          <li><span class="spot-check">✓</span>Bulletin board for news, alerts, and team celebrations</li>
+        </ul>
+        <a href="#waitlist" class="btn-outline">See Communications →</a>
+      </div>
+      <div>
+        <div class="sp-mockup">
+          <div class="sp-mbar">
+            <div class="sp-mbar-dot"></div>
+            <div class="sp-mbar-title">Messages</div>
+          </div>
+          <div class="sp-mbody">
+            <div class="thread-list">
+              <div class="t-item active">
+                <div class="t-avatar av-o">D</div>
+                <div class="t-info">
+                  <div class="t-subject">Critical Findings — Decatur</div>
+                  <div class="t-preview">Please schedule a deep clean...</div>
+                </div>
+              </div>
+              <div class="t-item">
+                <div class="t-avatar av-b">B</div>
+                <div class="t-info">
+                  <div class="t-subject">Summer Menu Prep Questions</div>
+                  <div class="t-preview">Peach syrup is backordered...</div>
+                </div>
+                <div class="t-unread"></div>
+              </div>
+              <div class="t-item">
+                <div class="t-avatar av-g">M</div>
+                <div class="t-info">
+                  <div class="t-subject">Equipment Maintenance — Fryer</div>
+                  <div class="t-preview">Tech arriving Thursday 9am</div>
+                </div>
+              </div>
+            </div>
+            <div class="chat-area">
+              <div class="bubble hq">
+                <div class="bsender">HQ</div>
+                Please also schedule a deep clean for the kitchen equipment by end of week.
+              </div>
+              <div class="bubble loc">
+                <div class="bsender">Decatur Manager</div>
+                Understood. We've restocked handwashing stations and ordered new temp log sheets. Will submit full plan tomorrow.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Spotlight 3: Training ──────────────────────────────────────────── -->
+  <section class="spotlight">
+    <div class="spot-inner">
+      <div class="spot-text">
+        <div class="section-eyebrow">Training & Compliance</div>
+        <h2 class="section-title">Know who's trained and who needs attention.</h2>
+        <p>Track completion rates across every training module and every location in a single matrix. Spot gaps before they become compliance issues — and before the auditor does.</p>
+        <ul class="spot-list">
+          <li><span class="spot-check">✓</span>Module-by-location completion matrix at a glance</li>
+          <li><span class="spot-check">✓</span>Quiz scores and completion dates per employee</li>
+          <li><span class="spot-check">✓</span>Required vs. optional module tracking</li>
+          <li><span class="spot-check">✓</span>Exportable training and compliance reports</li>
+        </ul>
+        <a href="#waitlist" class="btn-outline">See Training →</a>
+      </div>
+      <div>
+        <div class="sp-mockup">
+          <div class="sp-mbar">
+            <div class="sp-mbar-dot"></div>
+            <div class="sp-mbar-title">Training Completion Matrix</div>
+          </div>
+          <div class="sp-mbody">
+            <div class="tm-wrap">
+              <table class="tm">
+                <thead>
+                  <tr>
+                    <th>Module</th>
+                    <th>DT</th>
+                    <th>BH</th>
+                    <th>MT</th>
+                    <th>DC</th>
+                    <th>MR</th>
+                    <th>SM</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Food Safety Cert.</td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tx">✗</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                  </tr>
+                  <tr>
+                    <td>Brand Standards</td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                  </tr>
+                  <tr>
+                    <td>Opening & Closing</td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                  </tr>
+                  <tr>
+                    <td>Customer Service</td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tx">✗</span></td>
+                    <td><span class="tx">✗</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tx">✗</span></td>
+                  </tr>
+                  <tr>
+                    <td>Emergency Response</td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tx">✗</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tx">✗</span></td>
+                    <td><span class="tc">✓</span></td>
+                    <td><span class="tx">✗</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tm-footer">
+              <span class="tm-pill tp-g">Downtown 100%</span>
+              <span class="tm-pill tp-g">Marietta 100%</span>
+              <span class="tm-pill tp-y">Buckhead 80%</span>
+              <span class="tm-pill tp-y">Midtown 60%</span>
+              <span class="tm-pill tp-r">Decatur 40%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Built for Franchise Ops ────────────────────────────────────────── -->
+  <section class="built-band">
+    <div class="section-eyebrow">Purpose-Built</div>
+    <h2 class="section-title">Built for how franchises actually operate.</h2>
+    <p class="section-sub" style="margin-bottom:52px">Every feature was designed around the real workflows of franchise operators — not bolted on as an afterthought.</p>
+    <div class="built-grid">
+      <div class="built-item">
+        <div class="built-item-icon">🏢</div>
+        <h4>Multi-location</h4>
+        <p>Manage any number of locations from one central hub</p>
+      </div>
+      <div class="built-item">
+        <div class="built-item-icon">🗺️</div>
+        <h4>Region Groups</h4>
+        <p>Organize locations into regions for targeted oversight</p>
+      </div>
+      <div class="built-item">
+        <div class="built-item-icon">⚡</div>
+        <h4>Real-time Data</h4>
+        <p>Live updates across all locations — no stale reports</p>
+      </div>
+      <div class="built-item">
+        <div class="built-item-icon">📱</div>
+        <h4>Mobile-ready</h4>
+        <p>Works on any device for on-the-floor teams and managers</p>
+      </div>
+      <div class="built-item">
+        <div class="built-item-icon">🔒</div>
+        <h4>Role-based Access</h4>
+        <p>HQ, franchisee, and manager permission levels built-in</p>
+      </div>
+      <div class="built-item">
+        <div class="built-item-icon">📥</div>
+        <h4>Exportable Reports</h4>
+        <p>Download any report as CSV or PDF, whenever you need it</p>
+      </div>
+      <div class="built-item">
+        <div class="built-item-icon">✅</div>
+        <h4>Compliance Tracking</h4>
+        <p>Policy acknowledgment and training records in one place</p>
+      </div>
+      <div class="built-item">
+        <div class="built-item-icon">🔔</div>
+        <h4>Smart Alerts</h4>
+        <p>Instant notifications for critical findings and missed deadlines</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA / Waitlist ─────────────────────────────────────────────────── -->
+  <section class="cta-section" id="waitlist">
+    <div class="cta-box">
+      <h2>Ready to bring your franchise network into one place?</h2>
+      <p>Join the early access list and be among the first franchise teams to run on Franchisli. We'll reach out to set up a personalized demo.</p>
+      <form class="cta-form" onsubmit="handleWaitlist(event)">
+        <input type="email" id="wl-email" placeholder="you@yourfranchise.com" required>
+        <button type="submit" id="wl-btn">Request Access</button>
+      </form>
+      <p class="cta-note">No commitment required. We'll be in touch within 24 hours.</p>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logomark">F</div>
+          Franchisli
+        </div>
+        <p class="footer-desc">The franchise management platform that keeps every location aligned — operations, audits, training, and communications in one place.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#">Operations</a></li>
+          <li><a href="#">Audits & Inspections</a></li>
+          <li><a href="#">Communications</a></li>
+          <li><a href="#">Documents & SOPs</a></li>
+          <li><a href="#">Training</a></li>
+          <li><a href="#">Reporting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Franchisli. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Sticky nav shadow ────────────────────────────────────────────────
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 12);
+    }, { passive: true });
+
+    // ── Smooth scroll ────────────────────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          e.preventDefault();
+          const el = document.querySelector(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── Waitlist form ────────────────────────────────────────────────────
+    function handleWaitlist(e) {
+      e.preventDefault();
+      const btn = document.getElementById('wl-btn');
+      const orig = btn.textContent;
+      btn.textContent = "✓ You're on the list!";
+      btn.style.background = '#16a34a';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+        btn.disabled = false;
+        e.target.reset();
+      }, 5000);
+    }
+
+    // ── Intersection fade-in ─────────────────────────────────────────────
+    const style = document.createElement('style');
+    style.textContent = `
+      .fade-in { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+      .fade-in.visible { opacity: 1; transform: translateY(0); }
+    `;
+    document.head.appendChild(style);
+
+    const targets = [
+      '.pain-card', '.feat-card', '.spot-inner', '.built-item', '.cta-box'
+    ];
+    document.querySelectorAll(targets.join(',')).forEach((el, i) => {
+      el.classList.add('fade-in');
+      el.style.transitionDelay = `${(i % 4) * 70}ms`;
+    });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
