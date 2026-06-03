@@ -202,9 +202,9 @@ export default function Nav() {
 
       {/* Right CTAs */}
       <div className="flex items-center gap-2">
-        <Link href="/login" className="hidden sm:block text-sm font-semibold text-slate-500 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">
+        <a href={process.env.NEXT_PUBLIC_APP_URL ? `${process.env.NEXT_PUBLIC_APP_URL}/login` : "https://franchisli-web.vercel.app/login"} className="hidden sm:block text-sm font-semibold text-slate-500 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">
           Login
-        </Link>
+        </a>
         <a
           href="#waitlist"
           className="font-display text-sm font-bold bg-brand text-white px-5 py-2.5 rounded-lg
