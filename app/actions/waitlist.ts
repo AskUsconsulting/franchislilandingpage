@@ -2,11 +2,19 @@
 
 import { createClient } from "@supabase/supabase-js";
 
+export interface DemoRequest {
+  full_name: string;
+  business_name: string;
+  locations_count: number;
+  email: string;
+  phone?: string;
+}
+
 type Result =
   | { success: true }
   | { success: false; message: string };
 
-export async function joinWaitlist(email: string): Promise<Result> {
+export async function joinWaitlist(data: DemoRequest): Promise<Result> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -19,10 +27,15 @@ export async function joinWaitlist(email: string): Promise<Result> {
 
   const { error } = await supabase
     .from("waitlist")
-    .insert({ email: email.toLowerCase().trim() });
+    .insert({
+      email: data.email.toLowerCase().trim(),
+      full_name: data.full_name.trim(),
+      business_name: data.business_name.trim(),
+      locations_count: data.locations_count,
+      phone: data.phone?.trim() || null,
+    });
 
   if (error) {
-    // Unique constraint = already signed up
     if (error.code === "23505") {
       return { success: false, message: "That email is already on the list." };
     }
