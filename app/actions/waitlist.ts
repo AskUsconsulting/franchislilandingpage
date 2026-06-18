@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@supabase/supabase-js";
+import { sendWaitlistWelcome } from "@/app/lib/email";
 
 export interface DemoRequest {
   full_name: string;
@@ -42,6 +43,13 @@ export async function joinWaitlist(data: DemoRequest): Promise<Result> {
     console.error("Waitlist insert error:", error.message);
     return { success: false, message: "Something went wrong. Please try again." };
   }
+
+  // Send the welcome email — non-blocking, never fails the signup
+  await sendWaitlistWelcome({
+    to: data.email.toLowerCase().trim(),
+    fullName: data.full_name.trim(),
+    businessName: data.business_name.trim(),
+  });
 
   return { success: true };
 }
