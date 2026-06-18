@@ -43,3 +43,26 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ── Dark hero background treatment ───────────────────────────────────────── */
+.hero-dark {
+  background:
+    radial-gradient(900px 500px at 50% -10%, rgba(79, 115, 196, 0.35), transparent 70%),
+    radial-gradient(700px 500px at 85% 20%, rgba(217, 95, 59, 0.14), transparent 65%),
+    linear-gradient(180deg, #0a1430 0%, #0d1a3a 55%, #0a1430 100%);
+}
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 80%);
+          mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 80%);
+}
+
+/* subtle marquee for logo / industry rows */
+@keyframes float-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-float-up { animation: float-up 0.6s ease both; }

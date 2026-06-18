@@ -145,11 +145,10 @@ function DashboardMockup() {
   return (
     <div className="relative max-w-4xl mx-auto">
       {/* glow */}
-      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-3/4 h-20
-                      bg-brand/10 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute -inset-x-10 -top-6 -bottom-10 bg-brand-400/20 rounded-[40px] blur-3xl pointer-events-none" />
 
-      <div className="relative bg-white rounded-2xl border border-slate-200
-                      shadow-[0_24px_64px_rgba(15,23,42,.13)] overflow-hidden">
+      <div className="relative bg-white rounded-2xl border border-white/10
+                      shadow-[0_40px_100px_rgba(0,0,0,.5)] overflow-hidden ring-1 ring-white/10">
         {/* Browser chrome */}
         <div className="bg-brand px-5 py-2.5 flex items-center justify-between">
           <div className="flex gap-1.5">
@@ -406,61 +405,61 @@ export default function Home() {
     <>
       <Nav />
 
-      {/* ── Top banner ────────────────────────────────────────────────── */}
-      <div className="bg-brand text-white text-center py-2.5 px-5 text-[13.5px] font-medium">
-        Franchisli is now in early access —{" "}
-        <a href="#waitlist" className="font-bold underline underline-offset-2 hover:text-white/80">
-          Reserve your spot
-        </a>
-      </div>
-
-      {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#f0f5ff] via-white to-[#fff8f5] px-[6%] pt-24 pb-20 text-center">
-        <div className="absolute -top-40 -left-32 w-[600px] h-[600px] bg-brand/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -top-20 -right-32 w-[500px] h-[500px] bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+      {/* ── Hero (dark) ───────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden hero-dark px-[6%] pt-20 pb-24 text-center">
+        <div className="absolute inset-0 grid-overlay pointer-events-none" />
 
         <div className="relative">
-          <span className="inline-block bg-brand-50 border border-brand-100 text-brand text-xs font-bold tracking-[0.1em] uppercase px-4 py-1.5 rounded-full mb-7">
-            Multi-Location Operations Platform
-          </span>
+          <a
+            href="#waitlist"
+            className="inline-flex items-center gap-2 bg-white/10 border border-white/15 backdrop-blur
+                       text-white/90 text-[13px] font-semibold px-4 py-1.5 rounded-full mb-8
+                       hover:bg-white/15 transition-colors animate-float-up"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+            Now in early access — reserve your spot
+            <ArrowRight size={13} />
+          </a>
 
-          <h1 className="font-display font-black tracking-tight text-slate-900 text-5xl sm:text-6xl lg:text-7xl leading-[1.05] max-w-[860px] mx-auto mb-6">
-            Run every location{" "}
-            <span className="text-brand">to the same standard.</span>
+          <h1 className="font-display font-black tracking-tight text-white text-5xl sm:text-6xl lg:text-[80px] leading-[1.02] max-w-[920px] mx-auto mb-7 animate-float-up">
+            Every location,{" "}
+            <span className="bg-gradient-to-r from-[#7ea2e8] to-[#a9c2f4] bg-clip-text text-transparent">
+              run like your best one.
+            </span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-slate-500 max-w-[580px] mx-auto mb-9 leading-relaxed">
-            Audits, checklists, training, and team communication — in one platform
-            built for car washes, restaurants, and franchise networks.
+          <p className="text-lg sm:text-xl text-white/65 max-w-[600px] mx-auto mb-10 leading-relaxed animate-float-up">
+            The operations platform for car washes, restaurants, and franchises —
+            audits, checklists, training, and team comms in one clean dashboard.
           </p>
 
-          <div className="flex items-center justify-center gap-3 flex-wrap mb-7">
+          <div className="flex items-center justify-center gap-3 flex-wrap mb-8 animate-float-up">
             <a
               href="#waitlist"
-              className="font-display font-bold text-base bg-brand text-white px-7 py-4 rounded-xl
-                         shadow-[0_4px_20px_rgba(44,79,163,.28)] hover:bg-brand-dark hover:-translate-y-0.5
+              className="font-display font-bold text-base bg-white text-[#0d1a3a] px-7 py-4 rounded-xl
+                         shadow-[0_8px_30px_rgba(0,0,0,.25)] hover:-translate-y-0.5 hover:shadow-[0_12px_36px_rgba(0,0,0,.3)]
                          transition-all duration-200 flex items-center gap-2"
             >
-              Request Demo <ArrowRight size={16} />
+              Request a Demo <ArrowRight size={16} />
             </a>
             <a
               href="#features"
-              className="font-semibold text-base text-slate-700 bg-white border-[1.5px] border-slate-200
-                         px-7 py-4 rounded-xl hover:border-brand hover:text-brand transition-all duration-200"
+              className="font-semibold text-base text-white bg-white/5 border border-white/20
+                         px-7 py-4 rounded-xl hover:bg-white/10 transition-all duration-200"
             >
               See how it works
             </a>
           </div>
 
           {/* Rating / trust badge */}
-          <div className="flex items-center justify-center gap-2.5 mb-16">
+          <div className="flex items-center justify-center gap-2.5 mb-16 animate-float-up">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={16} className="text-amber-400 fill-amber-400" />
+                <Star key={i} size={15} className="text-amber-400 fill-amber-400" />
               ))}
             </div>
-            <p className="text-sm text-slate-500">
-              <span className="font-bold text-slate-700">4.9/5</span> from multi-unit operators
+            <p className="text-sm text-white/55">
+              <span className="font-bold text-white/85">4.9/5</span> from multi-unit operators
             </p>
           </div>
 
@@ -469,9 +468,9 @@ export default function Home() {
       </section>
 
       {/* ── Industries strip ──────────────────────────────────────────── */}
-      <section className="border-b border-slate-200 py-14 px-[6%] text-center bg-white">
-        <p className="text-[11px] font-bold tracking-[0.14em] uppercase text-slate-400 mb-8">
-          Built for operators who run more than one location
+      <section className="border-b border-slate-200 py-12 px-[6%] text-center bg-white">
+        <p className="text-[11px] font-bold tracking-[0.14em] uppercase text-slate-400 mb-7">
+          One platform for every kind of multi-location business
         </p>
         <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap max-w-[820px] mx-auto">
           {[
@@ -482,29 +481,11 @@ export default function Home() {
           ].map(({ icon: Icon, label }) => (
             <div
               key={label}
-              className="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-full px-5 py-2.5"
+              className="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-full px-5 py-2.5
+                         hover:border-brand-200 hover:bg-brand-50/40 transition-colors"
             >
               <Icon size={17} className="text-brand" />
               <span className="font-display font-bold text-[14px] text-slate-700">{label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Metrics band ──────────────────────────────────────────────── */}
-      <section className="py-20 px-[6%] bg-white">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-[1000px] mx-auto text-center">
-          {[
-            { stat: "5+ hrs",  label: "saved per location each week" },
-            { stat: "98%",     label: "audit completion across sites" },
-            { stat: "1 hub",   label: "for every location and team" },
-            { stat: "30%",     label: "fewer repeat findings" },
-          ].map((m) => (
-            <div key={m.label}>
-              <p className="font-display font-black text-brand text-4xl sm:text-5xl tracking-tight mb-2">
-                {m.stat}
-              </p>
-              <p className="text-[14px] text-slate-500 leading-snug max-w-[180px] mx-auto">{m.label}</p>
             </div>
           ))}
         </div>
@@ -738,19 +719,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────────────── */}
-      <section id="waitlist" className="py-28 px-[6%] bg-slate-50 text-center">
-        <div className="bg-white border border-slate-200 rounded-3xl p-16 max-w-[660px] mx-auto
-                        shadow-[0_16px_48px_rgba(15,23,42,.06)]">
-          <h2 className="font-display font-black tracking-tight text-[clamp(26px,3.5vw,44px)] text-slate-900 mb-4">
-            Ready to bring your franchise network into one place?
+      {/* ── CTA (dark) ────────────────────────────────────────────────── */}
+      <section id="waitlist" className="relative overflow-hidden hero-dark py-28 px-[6%] text-center">
+        <div className="absolute inset-0 grid-overlay pointer-events-none" />
+        <div className="relative max-w-[680px] mx-auto">
+          <h2 className="font-display font-black tracking-tight text-[clamp(28px,4vw,52px)] text-white mb-5 leading-[1.05]">
+            Bring every location{" "}
+            <span className="bg-gradient-to-r from-[#7ea2e8] to-[#a9c2f4] bg-clip-text text-transparent">
+              into one place.
+            </span>
           </h2>
-          <p className="text-[17px] text-slate-500 leading-relaxed mb-9">
-            Join the early access list and be among the first franchise teams to
-            run on Franchisli. We&apos;ll reach out to set up a personalized demo.
+          <p className="text-[17px] text-white/65 leading-relaxed mb-9 max-w-[520px] mx-auto">
+            Join the early access list and be among the first operators to run on
+            Franchisli. We&apos;ll reach out to set up a personalized demo.
           </p>
-          <CTAForm />
-          <p className="text-[12.5px] text-slate-400 mt-4">
+          <div className="bg-white/5 border border-white/15 backdrop-blur rounded-2xl p-8 max-w-[540px] mx-auto">
+            <CTAForm />
+          </div>
+          <p className="text-[12.5px] text-white/45 mt-5">
             No commitment required. We&apos;ll be in touch within 24 hours.
           </p>
         </div>
