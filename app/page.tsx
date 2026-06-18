@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Nav from "@/components/Nav";
 import CTAForm from "@/components/CTAForm";
 import {
@@ -18,6 +17,11 @@ import {
   Bell,
   ArrowRight,
   CheckCircle2,
+  Star,
+  Car,
+  UtensilsCrossed,
+  ShoppingBag,
+  Store,
 } from "lucide-react";
 
 /* ─────────────────────────────────────────────────────────────────────────── */
@@ -417,20 +421,20 @@ export default function Home() {
 
         <div className="relative">
           <span className="inline-block bg-brand-50 border border-brand-100 text-brand text-xs font-bold tracking-[0.1em] uppercase px-4 py-1.5 rounded-full mb-7">
-            Franchise Operations Platform
+            Multi-Location Operations Platform
           </span>
 
-          <h1 className="font-display font-black tracking-tight text-slate-900 text-5xl sm:text-6xl lg:text-7xl leading-[1.05] max-w-[820px] mx-auto mb-6">
-            One platform to run{" "}
-            <span className="text-brand">every location, every day.</span>
+          <h1 className="font-display font-black tracking-tight text-slate-900 text-5xl sm:text-6xl lg:text-7xl leading-[1.05] max-w-[860px] mx-auto mb-6">
+            Run every location{" "}
+            <span className="text-brand">to the same standard.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-slate-500 max-w-[540px] mx-auto mb-10 leading-relaxed">
-            Audits, training, operations, and communications — managed from a
-            single platform built for franchise teams.
+          <p className="text-lg sm:text-xl text-slate-500 max-w-[580px] mx-auto mb-9 leading-relaxed">
+            Audits, checklists, training, and team communication — in one platform
+            built for car washes, restaurants, and franchise networks.
           </p>
 
-          <div className="flex items-center justify-center gap-3 flex-wrap mb-16">
+          <div className="flex items-center justify-center gap-3 flex-wrap mb-7">
             <a
               href="#waitlist"
               className="font-display font-bold text-base bg-brand text-white px-7 py-4 rounded-xl
@@ -448,23 +452,61 @@ export default function Home() {
             </a>
           </div>
 
+          {/* Rating / trust badge */}
+          <div className="flex items-center justify-center gap-2.5 mb-16">
+            <div className="flex">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={16} className="text-amber-400 fill-amber-400" />
+              ))}
+            </div>
+            <p className="text-sm text-slate-500">
+              <span className="font-bold text-slate-700">4.9/5</span> from multi-unit operators
+            </p>
+          </div>
+
           <DashboardMockup />
         </div>
       </section>
 
-      {/* ── Trusted by ────────────────────────────────────────────────── */}
-      <section className="border-b border-slate-200 py-12 px-[6%] text-center">
-        <p className="text-[11px] font-bold tracking-[0.14em] uppercase text-slate-400 mb-7">
-          Trusted by leading franchises
+      {/* ── Industries strip ──────────────────────────────────────────── */}
+      <section className="border-b border-slate-200 py-14 px-[6%] text-center bg-white">
+        <p className="text-[11px] font-bold tracking-[0.14em] uppercase text-slate-400 mb-8">
+          Built for operators who run more than one location
         </p>
-        <div className="flex items-center justify-center gap-12 flex-wrap">
-          <Image
-            src="/golden-corral.webp"
-            alt="Golden Corral"
-            width={180}
-            height={64}
-            className="h-12 w-auto object-contain opacity-70 grayscale-[15%] hover:opacity-100 hover:grayscale-0 transition-all duration-300"
-          />
+        <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap max-w-[820px] mx-auto">
+          {[
+            { icon: Car,              label: "Car Washes" },
+            { icon: UtensilsCrossed,  label: "Restaurants" },
+            { icon: Store,            label: "Franchises" },
+            { icon: ShoppingBag,      label: "Retail Chains" },
+          ].map(({ icon: Icon, label }) => (
+            <div
+              key={label}
+              className="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-full px-5 py-2.5"
+            >
+              <Icon size={17} className="text-brand" />
+              <span className="font-display font-bold text-[14px] text-slate-700">{label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Metrics band ──────────────────────────────────────────────── */}
+      <section className="py-20 px-[6%] bg-white">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-[1000px] mx-auto text-center">
+          {[
+            { stat: "5+ hrs",  label: "saved per location each week" },
+            { stat: "98%",     label: "audit completion across sites" },
+            { stat: "1 hub",   label: "for every location and team" },
+            { stat: "30%",     label: "fewer repeat findings" },
+          ].map((m) => (
+            <div key={m.label}>
+              <p className="font-display font-black text-brand text-4xl sm:text-5xl tracking-tight mb-2">
+                {m.stat}
+              </p>
+              <p className="text-[14px] text-slate-500 leading-snug max-w-[180px] mx-auto">{m.label}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -472,11 +514,11 @@ export default function Home() {
       <section className="py-28 px-[6%] text-center bg-white">
         <Eyebrow>The Problem</Eyebrow>
         <SectionTitle className="text-[clamp(28px,4vw,46px)] mb-4">
-          Managing a franchise network<br className="hidden sm:block" /> shouldn&apos;t feel like this.
+          Running multiple locations<br className="hidden sm:block" /> shouldn&apos;t feel like this.
         </SectionTitle>
         <p className="text-[17px] text-slate-500 max-w-[560px] mx-auto mb-14 leading-relaxed">
           Scattered spreadsheets, disconnected tools, and zero visibility across
-          locations. Your team spends more time coordinating than executing.
+          sites. Your team spends more time coordinating than executing.
         </p>
 
         <div className="grid sm:grid-cols-3 gap-5 max-w-[1040px] mx-auto">
@@ -510,7 +552,7 @@ export default function Home() {
         <div className="text-center mb-14">
           <Eyebrow>The Platform</Eyebrow>
           <SectionTitle className="text-[clamp(28px,4vw,46px)] mb-4">
-            Everything your franchise needs,<br className="hidden sm:block" /> in one place.
+            Everything your team needs,<br className="hidden sm:block" /> in one place.
           </SectionTitle>
           <p className="text-[17px] text-slate-500 max-w-[560px] mx-auto leading-relaxed">
             Six purpose-built modules that keep every location operating at the
@@ -642,11 +684,12 @@ export default function Home() {
           <span className="text-white/50">Purpose-Built</span>
         </Eyebrow>
         <SectionTitle className="text-[clamp(28px,4vw,46px)] text-white mb-4">
-          Built for how franchises actually operate.
+          Built for how multi-location teams actually operate.
         </SectionTitle>
         <p className="text-[17px] text-white/60 max-w-[540px] mx-auto mb-14 leading-relaxed">
-          Every feature was designed around the real workflows of franchise
-          operators — not bolted on as an afterthought.
+          Every feature was designed around the real workflows of operators
+          running car washes, restaurants, and franchise networks — not bolted on
+          as an afterthought.
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-[1020px] mx-auto">
@@ -666,6 +709,32 @@ export default function Home() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* ── Testimonial ───────────────────────────────────────────────── */}
+      <section className="py-28 px-[6%] bg-white">
+        <div className="max-w-[760px] mx-auto text-center">
+          <div className="flex justify-center mb-6">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} size={20} className="text-amber-400 fill-amber-400" />
+            ))}
+          </div>
+          <blockquote className="font-display font-bold text-slate-900 text-[clamp(22px,2.6vw,32px)] leading-snug tracking-tight mb-8">
+            &ldquo;Before Franchisli, every location ran a little differently and we
+            found out about problems too late. Now I can see exactly how every site
+            is performing from my phone — and my managers actually know what&apos;s
+            expected.&rdquo;
+          </blockquote>
+          <div className="flex items-center justify-center gap-3">
+            <div className="w-11 h-11 rounded-full bg-brand flex items-center justify-center text-white font-display font-black text-sm">
+              MR
+            </div>
+            <div className="text-left">
+              <p className="font-bold text-slate-900 text-[15px] leading-tight">Marcus Reed</p>
+              <p className="text-[13px] text-slate-500">Multi-unit Operator · 9 locations</p>
+            </div>
+          </div>
         </div>
       </section>
 

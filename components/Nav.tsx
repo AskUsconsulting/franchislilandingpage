@@ -12,7 +12,7 @@ import {
   BarChart2,
   Building2,
   Map,
-  Eye,
+  Car,
   ShieldCheck,
   BookOpen,
   LayoutDashboard,
@@ -65,14 +65,14 @@ const SOLUTIONS = [
     desc: "Clear daily priorities, direct access to SOPs, and a direct line to HQ without the noise.",
   },
   {
+    icon: Car,
+    label: "For Carwash Owners",
+    desc: "Keep every wash site on standard — site checklists, equipment audits, and team accountability in one place.",
+  },
+  {
     icon: Map,
     label: "For Multi-unit Operators",
     desc: "Scale your network without scaling your team. Regional grouping and cross-location reporting built in.",
-  },
-  {
-    icon: Eye,
-    label: "For Compliance Teams",
-    desc: "Real-time visibility into audit scores, open findings, and training gaps before they become liabilities.",
   },
 ];
 
