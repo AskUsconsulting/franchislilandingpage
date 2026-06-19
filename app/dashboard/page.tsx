@@ -17,9 +17,9 @@ export default async function DashboardPage() {
       <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 shadow-sm">
         <div className="flex items-center gap-2.5 font-display font-black text-xl tracking-tight text-brand">
           <span className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center text-white text-[15px] font-black">
-            F
+            O
           </span>
-          Franchisli
+          Opereva
         </div>
 
         <div className="flex items-center gap-4">
@@ -47,7 +47,7 @@ export default async function DashboardPage() {
           Welcome back, {name} 👋
         </h1>
         <p className="text-slate-500 text-lg max-w-md mx-auto">
-          Your Franchisli dashboard is coming soon. We&apos;re putting the finishing touches on your workspace.
+          Your Opereva dashboard is coming soon. We&apos;re putting the finishing touches on your workspace.
         </p>
 
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
@@ -68,8 +68,8 @@ export default async function DashboardPage() {
 
         <p className="mt-12 text-sm text-slate-400">
           Questions? Email us at{" "}
-          <a href="mailto:hello@franchisli.com" className="text-brand font-medium hover:underline">
-            hello@franchisli.com
+          <a href="mailto:hello@opereva.com" className="text-brand font-medium hover:underline">
+            hello@opereva.com
           </a>
         </p>
       </main>

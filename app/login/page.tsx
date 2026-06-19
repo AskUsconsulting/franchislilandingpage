@@ -15,9 +15,9 @@ export default async function LoginPage({ searchParams }: Props) {
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2.5 font-display font-black text-2xl tracking-tight text-brand">
             <span className="w-10 h-10 rounded-xl bg-brand flex items-center justify-center text-white text-lg font-black">
-              F
+              O
             </span>
-            Franchisli
+            Opereva
           </Link>
           <p className="mt-3 text-slate-500 text-sm">Sign in to your account</p>
         </div>

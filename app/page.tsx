@@ -157,7 +157,7 @@ function DashboardMockup() {
             <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
           </div>
           <div className="bg-white/15 rounded-md px-4 py-1 text-[11px] text-white/75 font-mono tracking-tight">
-            app.franchisli.com/dashboard
+            app.opereva.com/dashboard
           </div>
           <div className="w-14" />
         </div>
@@ -702,7 +702,7 @@ export default function Home() {
             ))}
           </div>
           <blockquote className="font-display font-bold text-slate-900 text-[clamp(22px,2.6vw,32px)] leading-snug tracking-tight mb-8">
-            &ldquo;Before Franchisli, every location ran a little differently and we
+            &ldquo;Before Opereva, every location ran a little differently and we
             found out about problems too late. Now I can see exactly how every site
             is performing from my phone — and my managers actually know what&apos;s
             expected.&rdquo;
@@ -731,7 +731,7 @@ export default function Home() {
           </h2>
           <p className="text-[17px] text-white/65 leading-relaxed mb-9 max-w-[520px] mx-auto">
             Join the early access list and be among the first operators to run on
-            Franchisli. We&apos;ll reach out to set up a personalized demo.
+            Opereva. We&apos;ll reach out to set up a personalized demo.
           </p>
           <div className="bg-white/5 border border-white/15 backdrop-blur rounded-2xl p-8 max-w-[540px] mx-auto">
             <CTAForm />
@@ -748,8 +748,8 @@ export default function Home() {
           {/* Brand col */}
           <div className="col-span-2 sm:col-span-1">
             <div className="flex items-center gap-2.5 font-display font-black text-[19px] tracking-tight mb-4">
-              <span className="w-8 h-8 rounded-lg bg-white/12 flex items-center justify-center text-[14px] font-black">F</span>
-              Franchisli
+              <span className="w-8 h-8 rounded-lg bg-white/12 flex items-center justify-center text-[14px] font-black">O</span>
+              Opereva
             </div>
             <p className="text-[13.5px] text-white/40 leading-relaxed max-w-[240px]">
               The franchise management platform that keeps every location aligned —
@@ -789,7 +789,7 @@ export default function Home() {
         </div>
 
         <div className="border-t border-white/8 pt-7 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[12.5px] text-white/25">© 2026 Franchisli. All rights reserved.</p>
+          <p className="text-[12.5px] text-white/25">© 2026 Opereva. All rights reserved.</p>
           <div className="flex gap-6 text-[12.5px] text-white/25">
             <a href="#" className="hover:text-white/60 transition-colors">Privacy</a>
             <a href="#" className="hover:text-white/60 transition-colors">Terms</a>

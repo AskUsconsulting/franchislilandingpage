@@ -15,13 +15,13 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Franchisli — Franchise Management Platform",
+  title: "Opereva — Multi-Location Operations Platform",
   description:
-    "One platform to run every location, every day. Audits, training, operations, and communications built specifically for franchise teams.",
+    "Run every location to the same standard. Audits, checklists, training, and team communication in one platform — built for car washes, restaurants, and franchises.",
   openGraph: {
-    title: "Franchisli — Franchise Management Platform",
+    title: "Opereva — Multi-Location Operations Platform",
     description:
-      "One platform to run every location, every day. Audits, training, operations, and communications in one place.",
+      "Run every location to the same standard. Audits, checklists, training, and team communication in one clean dashboard.",
     type: "website",
   },
 };

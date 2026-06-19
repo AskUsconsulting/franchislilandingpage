@@ -131,9 +131,9 @@ export default function Nav() {
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2.5 font-display font-black text-xl tracking-tight text-brand">
         <span className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center text-white text-[15px] font-black">
-          F
+          O
         </span>
-        Franchisli
+        Opereva
       </Link>
 
       {/* Center nav */}

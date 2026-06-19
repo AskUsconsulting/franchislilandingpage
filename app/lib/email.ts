@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 
-const FROM = process.env.RESEND_FROM || "Franchisli <onboarding@resend.dev>";
+const FROM = process.env.RESEND_FROM || "Opereva <onboarding@resend.dev>";
 
 interface WelcomeArgs {
   to: string;
@@ -27,7 +27,7 @@ export async function sendWaitlistWelcome({ to, fullName, businessName }: Welcom
     const { error } = await resend.emails.send({
       from: FROM,
       to,
-      subject: "You're on the Franchisli waitlist 🎉",
+      subject: "You're on the Opereva waitlist 🎉",
       html: emailHtml(firstName, businessName),
       text: emailText(firstName, businessName),
     });
@@ -45,9 +45,9 @@ export async function sendWaitlistWelcome({ to, fullName, businessName }: Welcom
 function emailText(firstName: string, business: string) {
   return `Hi ${firstName},
 
-Thanks for joining the Franchisli waitlist${business ? ` for ${business}` : ""}!
+Thanks for joining the Opereva waitlist${business ? ` for ${business}` : ""}!
 
-You're officially on the list. Franchisli is the operations platform for multi-location businesses — car washes, restaurants, and franchises — bringing audits, checklists, training, and team communication into one clean dashboard.
+You're officially on the list. Opereva is the operations platform for multi-location businesses — car washes, restaurants, and franchises — bringing audits, checklists, training, and team communication into one clean dashboard.
 
 What happens next:
 1. We'll review your request and reach out within 24 hours to set up a personalized demo.
@@ -55,7 +55,7 @@ What happens next:
 
 Questions in the meantime? Just reply to this email.
 
-— The Franchisli Team`;
+— The Opereva Team`;
 }
 
 function emailHtml(firstName: string, business: string) {
@@ -70,8 +70,8 @@ function emailHtml(firstName: string, business: string) {
         <!-- Header -->
         <tr><td style="background:#0d1a3a;padding:32px 40px;">
           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-            <td style="background:rgba(255,255,255,.12);width:36px;height:36px;border-radius:9px;text-align:center;vertical-align:middle;color:#ffffff;font-weight:800;font-size:18px;">F</td>
-            <td style="padding-left:12px;color:#ffffff;font-weight:800;font-size:20px;letter-spacing:-.5px;">Franchisli</td>
+            <td style="background:rgba(255,255,255,.12);width:36px;height:36px;border-radius:9px;text-align:center;vertical-align:middle;color:#ffffff;font-weight:800;font-size:18px;">O</td>
+            <td style="padding-left:12px;color:#ffffff;font-weight:800;font-size:20px;letter-spacing:-.5px;">Opereva</td>
           </tr></table>
         </td></tr>
 
@@ -79,10 +79,10 @@ function emailHtml(firstName: string, business: string) {
         <tr><td style="padding:40px;">
           <h1 style="margin:0 0 16px;font-size:24px;line-height:1.25;color:#0f172a;font-weight:800;">You're on the list, ${firstName}! 🎉</h1>
           <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#475569;">
-            Thanks for joining the Franchisli waitlist${business ? ` for <strong style="color:#0f172a;">${business}</strong>` : ""}. You're officially in line for early access.
+            Thanks for joining the Opereva waitlist${business ? ` for <strong style="color:#0f172a;">${business}</strong>` : ""}. You're officially in line for early access.
           </p>
           <p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:#475569;">
-            Franchisli is the operations platform for multi-location businesses — car washes, restaurants, and franchises — bringing audits, checklists, training, and team communication into one clean dashboard.
+            Opereva is the operations platform for multi-location businesses — car washes, restaurants, and franchises — bringing audits, checklists, training, and team communication into one clean dashboard.
           </p>
 
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:4px;margin:0 0 24px;">
@@ -100,8 +100,8 @@ function emailHtml(firstName: string, business: string) {
 
         <!-- Footer -->
         <tr><td style="padding:24px 40px;border-top:1px solid #f1f5f9;">
-          <p style="margin:0;font-size:13px;color:#94a3b8;">— The Franchisli Team</p>
-          <p style="margin:8px 0 0;font-size:12px;color:#cbd5e1;">© 2026 Franchisli. You received this because you joined our waitlist.</p>
+          <p style="margin:0;font-size:13px;color:#94a3b8;">— The Opereva Team</p>
+          <p style="margin:8px 0 0;font-size:12px;color:#cbd5e1;">© 2026 Opereva. You received this because you joined our waitlist.</p>
         </td></tr>
 
       </table>
