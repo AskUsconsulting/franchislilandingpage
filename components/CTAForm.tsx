@@ -87,10 +87,10 @@ export default function CTAForm() {
       {/* Modal overlay */}
       {showModal && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-4 bg-black/40 backdrop-blur-sm overflow-y-auto"
           onClick={(e) => { if (e.target === e.currentTarget) setShowModal(false); }}
         >
-          <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8 animate-in fade-in zoom-in-95 duration-200">
+          <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8 my-auto max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
             {/* Close */}
             <button
               onClick={() => setShowModal(false)}
@@ -102,7 +102,7 @@ export default function CTAForm() {
             <div className="mb-6">
               <h2 className="text-xl font-bold text-slate-900">Request a Demo</h2>
               <p className="text-sm text-slate-500 mt-1">
-                Tell us about your franchise and we&apos;ll be in touch within 24 hours.
+                Tell us about your business and we&apos;ll be in touch within 24 hours.
               </p>
             </div>
 
