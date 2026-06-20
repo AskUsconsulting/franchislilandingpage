@@ -733,7 +733,7 @@ export default function Home() {
             Join the early access list and be among the first operators to run on
             Opereva. We&apos;ll reach out to set up a personalized demo.
           </p>
-          <div className="bg-white/5 border border-white/15 backdrop-blur rounded-2xl p-8 max-w-[540px] mx-auto">
+          <div className="bg-white/5 border border-white/15 rounded-2xl p-8 max-w-[540px] mx-auto">
             <CTAForm />
           </div>
           <p className="text-[12.5px] text-white/45 mt-5">
